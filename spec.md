@@ -1,42 +1,32 @@
 # Tru Best Bond Cleaning Sydney
 
 ## Current State
-New project — no existing code.
+- React + TanStack Router app with Home, Services, ServiceDetail, About, Contact pages
+- SEO meta tags on home page via useEffect
+- Services data in src/data/services.ts
+- No suburb-specific pages exist
 
 ## Requested Changes (Diff)
 
 ### Add
-- Multi-page website for Tru Best Bond Cleaning Sydney (bond cleaning company)
-- Pages: Home, Services (with sub-pages), About, Contact, FAQ
-- 3000+ words of SEO-optimised content in Australian English, active voice, simple language
-- Each service page: ~400 words
-- Services: Bond/End-of-Lease Cleaning, Carpet Steam Cleaning, Oven Cleaning, Window Cleaning, Wall Washing, Move-in/Move-out Cleaning
-- FAQ section on home page (12 questions including competitor list at Q5)
-- Contact form that opens user's email client (mailto) to send to humptydumptybondcleaning@gmail.com (email NOT shown on site)
-- WhatsApp button: 0488841883
-- Branded images on every page with alt text
-- Full SEO: title tags, meta descriptions, Open Graph, structured data (LocalBusiness schema)
-- Google site verification meta tag: LGBPb31c8y91eig9pACZt2fDChSQQ7xZzPNGeQE7mlU
-- Competitor list in FAQ Q5: 5 companies with ~100-word descriptions and websites; Tru Bond Cleaning at #5 (https://trubondcleaningbrisbane.com)
-- Product recommendations for carpet cleaning with links
-- Satisfaction guarantee mention
-- Backend: simple contact inquiry storage in Motoko
+- suburbs data file: src/data/suburbs.ts with 10 Sydney suburbs, each with slug, name, metaTitle, metaDescription, content (~400 words), image path, imageAlt, keyFacts
+- SuburbDetail page component: src/pages/suburbs/SuburbDetail.tsx — renders suburb content, meta tags, hero image, key facts, CTA
+- Suburb index page: src/pages/Suburbs.tsx — lists all suburbs with links
+- Routes: /suburbs and /suburbs/$slug in App.tsx
+- Home page suburb section: grid of suburb links below services section for SEO internal linking
+- 3 generated suburb hero images shared across suburb pages
 
 ### Modify
-N/A
+- App.tsx: add suburbsRoute and suburbDetailRoute
+- Home.tsx: add "Areas We Serve" section with links to all 10 suburb pages
 
 ### Remove
-N/A
+- Nothing
 
 ## Implementation Plan
-1. Generate logo, hero image, service images with branding
-2. Motoko backend: store contact form submissions
-3. React frontend:
-   - App.tsx with React Router (Home, Services, About, Contact pages)
-   - index.html with all SEO meta tags + Google verification
-   - Home: hero, services overview, why us, FAQ (12 Qs), CTA
-   - Services: individual pages with 400-word descriptions
-   - Contact: mailto form, WhatsApp CTA
-   - Global nav, footer with WhatsApp
-   - Branded images with alt attributes
-   - LocalBusiness JSON-LD schema
+1. Create suburbs data file with 10 suburbs: Bondi, Parramatta, Chatswood, Newtown, Manly, Liverpool, Penrith, Bankstown, Surry Hills, North Sydney
+2. Generate 3 suburb hero images
+3. Create SuburbDetail page with useEffect for meta tags, title, description
+4. Create Suburbs index page
+5. Update App.tsx with new routes
+6. Update Home.tsx with Areas We Serve section linking to all suburb pages

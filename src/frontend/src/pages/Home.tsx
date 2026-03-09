@@ -12,6 +12,7 @@ import {
   CheckCircle,
   Clock,
   Leaf,
+  MapPin,
   MessageCircle,
   Phone,
   Shield,
@@ -19,6 +20,7 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { servicesData } from "../data/services";
+import { suburbsData } from "../data/suburbs";
 
 interface HomeProps {
   scrollToFaq?: boolean;
@@ -315,6 +317,58 @@ export default function Home({ scrollToFaq }: HomeProps) {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Areas We Serve — suburb links for SEO */}
+      <section
+        id="areas-we-serve"
+        className="container mx-auto px-4 py-14 max-w-5xl"
+      >
+        <div className="text-center mb-10">
+          <h2 className="section-heading mb-3">
+            Bond Cleaning Across Sydney Suburbs
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            We service every Sydney suburb. Click your suburb to find out more
+            about our bond cleaning service in your area.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+          {suburbsData.map((suburb, i) => (
+            <Link
+              key={suburb.slug}
+              to="/suburbs/$slug"
+              params={{ slug: suburb.slug }}
+              data-ocid={`suburbs.item.${i + 1}`}
+              className="group flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary hover:shadow-md transition-all"
+            >
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-display font-bold text-sm text-foreground group-hover:text-primary transition-colors">
+                  Bond Cleaning {suburb.name}
+                </div>
+                <div className="text-xs text-muted-foreground truncate">
+                  {suburb.keyFacts[0].value}
+                </div>
+              </div>
+              <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0" />
+            </Link>
+          ))}
+        </div>
+        <div className="text-center">
+          <Button
+            asChild
+            variant="outline"
+            data-ocid="suburbs.primary_button"
+            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full"
+          >
+            <Link to="/suburbs" className="flex items-center gap-2">
+              View All Sydney Suburbs <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
         </div>
       </section>
 

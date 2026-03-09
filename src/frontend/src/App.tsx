@@ -13,7 +13,9 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
+import Suburbs from "./pages/Suburbs";
 import ServiceDetail from "./pages/services/ServiceDetail";
+import SuburbDetail from "./pages/suburbs/SuburbDetail";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -49,6 +51,16 @@ const serviceDetailRoute = createRoute({
   path: "/services/$slug",
   component: ServiceDetail,
 });
+const suburbsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/suburbs",
+  component: Suburbs,
+});
+const suburbDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/suburbs/$slug",
+  component: SuburbDetail,
+});
 const aboutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/about",
@@ -65,6 +77,8 @@ const routeTree = rootRoute.addChildren([
   faqRoute,
   servicesRoute,
   serviceDetailRoute,
+  suburbsRoute,
+  suburbDetailRoute,
   aboutRoute,
   contactRoute,
 ]);
